@@ -1,0 +1,45 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { background: #0b0c0e; color: #f2f2f0; }
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.canvas-wrap { position: fixed; inset: 0; z-index: 0; }
+
+.loader {
+  position: fixed; inset: 0; z-index: 10;
+  display: grid; place-items: center;
+  background: #0b0c0e; font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+  transition: opacity .8s ease;
+}
+.loader.hide { opacity: 0; pointer-events: none; }
+
+.scroll { position: relative; z-index: 1; pointer-events: none; }
+
+.section {
+  height: 100vh;
+  display: flex; align-items: flex-end;
+  padding: 8vh 6vw;
+}
+.section.right { justify-content: flex-end; text-align: right; }
+
+.section-inner { max-width: 560px; }
+
+.kicker {
+  display: inline-block; font-size: 12px; letter-spacing: .25em;
+  opacity: .6; margin-bottom: 12px;
+}
+
+.section h2 {
+  font-size: clamp(44px, 8vw, 112px);
+  line-height: .92; font-weight: 800; letter-spacing: -.03em;
+  text-shadow: 0 2px 40px rgba(0,0,0,.45);
+}
+
+.section p { margin-top: 14px; font-size: 16px; opacity: .8; }
+
+@media (max-width: 640px) {
+  .section, .section.right { justify-content: flex-start; text-align: left; padding: 6vh 16px; }
+}
