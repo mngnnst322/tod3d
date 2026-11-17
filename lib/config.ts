@@ -11,18 +11,37 @@ export const SPLAT_URL = "/splats/oims.spz";
 export const SPLAT_QUATERNION: [number, number, number, number] = [0, 0, 0, 1];
 export const SPLAT_SCALE = 1;
 
-// Scroll хийхэд камер эдгээр цэгүүдээр дамжина (CatmullRom curve).
-// Эхний цэг = хуудасны эхэнд, сүүлийн цэг = хуудасны төгсгөлд.
-export const CAMERA_PATH: [number, number, number][] = [
-  [0, 0.3, 4],
-  [2.2, 0.6, 1.8],
-  [0.4, 1.4, 1.2],
-  [-1.8, 0.2, 2.2],
-  [0, 0, 0.9],
-];
+// ---- Зөвхөн оймсыг үлдээх ----
+// Оймс нь босоо цилиндр дотор байна. Үүнээс гадна бүх splat (ширээ, өрөө) устна.
+// Оймсны төв (splat файлаас тооцоолсон): x, y, z
+export const SOCK_CENTER: [number, number, number] = [0.104, -0.31, -0.672];
+export const SOCK_RADIUS = 0.11;   // оймсны хажуу тал тайрагдвал томсго
+export const SOCK_BOTTOM_Y = -0.446; // ширээ үлдвэл ихэсгэ (жишээ нь -0.445)
+export const SOCK_TOP_Y = -0.13;   // оймсны орой тайрагдвал ихэсгэ
+// Үүнээс том (бүдэг толбо) болон тунгалаг splat-уудыг устгана
+export const MAX_SPLAT_SIZE = 0.03;
+export const MIN_OPACITY = 0.1;
+// Үүнээс бараан splat-уудыг устгана (0..1). Оймс цайвар тул бараан толбо = хог.
+// Толбо үлдвэл ихэсгэ (0.4), оймсонд нүх гарвал багасга (0.15)
+export const MIN_BRIGHTNESS = 0.28;
+
+// Scroll хийхэд камер оймсыг тойрно. Хулганаар чирж бас эргүүлж болно.
+export const ORBIT_RADIUS = 0.8; // оймсноос камерын зай (бага = ойр)
+export const ORBIT_TURNS = 1;    // хуудсыг бүтэн гүйлгэхэд хэдэн удаа тойрох (1 = 360°)
 
 // Камер үргэлж энэ цэг рүү харна
-export const LOOK_AT: [number, number, number] = [0, 0, 0];
+export const LOOK_AT: [number, number, number] = SOCK_CENTER;
+
+// Хэсэг бүрийн арын өнгө (эрвээхэйн өнгөнүүд). Scroll хийхэд зөөлөн шилжинэ.
+// light = төвийн гэрэл, base = гол өнгө, deep = ирмэгийн бараан өнгө
+export const THEMES = [
+  { light: "#fff3e6", base: "#f4c7a1", deep: "#d9825b" }, // 01 Хаан эрвээхэй — тоор
+  { light: "#f6f0ff", base: "#d8c9f1", deep: "#9479c9" }, // 02 Хээ — нил ягаан
+  { light: "#f4f8ef", base: "#cfdcc4", deep: "#83a07c" }, // 03 Материал — ногоон
+  { light: "#fdf7ec", base: "#ecdcbf", deep: "#c39a5f" }, // 04 Чанар — элс/алт
+  { light: "#eef5ff", base: "#bfd5f3", deep: "#4f7fcf" }, // 05 Цуглуулга — цэнхэр морфо
+  { light: "#fff1f1", base: "#f3c4c8", deep: "#c8586a" }, // 06 Захиалах — ягаан
+];
 
 // Scroll-ийн хэсэг бүрийн текст
 export const SECTIONS = [

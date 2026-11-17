@@ -7,7 +7,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import Splat from "./Splat";
 import CameraRig from "./CameraRig";
-import { SECTIONS } from "@/lib/config";
+import Pedestal from "./Pedestal";
+import { SECTIONS, THEMES, LOOK_AT, ORBIT_RADIUS } from "@/lib/config";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,7 +26,25 @@ export default function Scene() {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
+    const root = document.documentElement;
+    const setTheme = (i: number) => {
+      const t = THEMES[Math.min(i, THEMES.length - 1)];
+      gsap.to(root, { "--bg-light": t.light, "--bg-base": t.base, "--bg-deep": t.deep, duration: 1.2, ease: "power2.out", overwrite: true });
+    };
+    gsap.set(root, { "--bg-light": THEMES[0].light, "--bg-base": THEMES[0].base, "--bg-deep": THEMES[0].deep });
+
     const ctx = gsap.context(() => {
+      // Хэсэг солигдоход арын өнгө солигдоно
+      gsap.utils.toArray<HTMLElement>(".section").forEach((el, i) => {
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 55%",
+          end: "bottom 55%",
+          onEnter: () => setTheme(i),
+          onEnterBack: () => setTheme(i),
+        });
+      });
+
       // Нийт scroll → камерын progress
       ScrollTrigger.create({
         trigger: wrap.current,
@@ -74,15 +93,27 @@ export default function Scene() {
     <>
       <div className="canvas-wrap">
         <Canvas
-          camera={{ fov: 50, near: 0.01, far: 100, position: [0, 0.3, 4] }}
-          dpr={[1, 1.5]}
-          gl={{ antialias: false }}
+          camera={{ fov: 50, near: 0.01, far: 100, position: [LOOK_AT[0], LOOK_AT[1] + 0.12, LOOK_AT[2] + ORBIT_RADIUS] }}
+          dpr={[1, 2]}
+          gl={{ antialias: true, alpha: true }}
         >
-          <color attach="background" args={["#0b0c0e"]} />
+          <Pedestal />
           <Splat onLoad={onLoad} />
           <CameraRig progress={progress} />
         </Canvas>
       </div>
+
+      <div className="backdrop" aria-hidden />
+
+      <header className="shop-nav">
+        <a className="brand" href="#">ЭРВЭЭХЭЙ</a>
+        <nav>
+          <a href="#">Цуглуулга</a>
+          <a href="#">Материал</a>
+          <a href="#">Хэмжээ</a>
+        </nav>
+        <a className="cart" href="#">Сагс (0)</a>
+      </header>
 
       <div className={`loader ${loaded ? "hide" : ""}`}>Далавч дэлгэж байна…</div>
 

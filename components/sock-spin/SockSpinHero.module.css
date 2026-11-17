@@ -1,0 +1,173 @@
+/* Fonts are local so the build needs no network. Cyrillic-ext covers Ө and Ү. */
+@font-face { font-family: "SockUnbounded"; font-weight: 500; font-display: swap; src: url("./fonts/unbounded-cyrillic-500-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "SockUnbounded"; font-weight: 500; font-display: swap; src: url("./fonts/unbounded-cyrillic-ext-500-normal.woff2") format("woff2"); unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F; }
+@font-face { font-family: "SockUnbounded"; font-weight: 500; font-display: swap; src: url("./fonts/unbounded-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+2215; }
+@font-face { font-family: "SockUnbounded"; font-weight: 800; font-display: swap; src: url("./fonts/unbounded-cyrillic-800-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "SockUnbounded"; font-weight: 800; font-display: swap; src: url("./fonts/unbounded-cyrillic-ext-800-normal.woff2") format("woff2"); unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F; }
+@font-face { font-family: "SockUnbounded"; font-weight: 800; font-display: swap; src: url("./fonts/unbounded-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+2215; }
+@font-face { font-family: "SockUnbounded"; font-weight: 900; font-display: swap; src: url("./fonts/unbounded-cyrillic-900-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "SockUnbounded"; font-weight: 900; font-display: swap; src: url("./fonts/unbounded-cyrillic-ext-900-normal.woff2") format("woff2"); unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F; }
+@font-face { font-family: "SockUnbounded"; font-weight: 900; font-display: swap; src: url("./fonts/unbounded-latin-900-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+2215; }
+@font-face { font-family: "SockGolos"; font-weight: 400; font-display: swap; src: url("./fonts/golos-text-cyrillic-400-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "SockGolos"; font-weight: 400; font-display: swap; src: url("./fonts/golos-text-cyrillic-ext-400-normal.woff2") format("woff2"); unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F; }
+@font-face { font-family: "SockGolos"; font-weight: 400; font-display: swap; src: url("./fonts/golos-text-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+2215; }
+@font-face { font-family: "SockGolos"; font-weight: 600; font-display: swap; src: url("./fonts/golos-text-cyrillic-600-normal.woff2") format("woff2"); unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+@font-face { font-family: "SockGolos"; font-weight: 600; font-display: swap; src: url("./fonts/golos-text-cyrillic-ext-600-normal.woff2") format("woff2"); unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F; }
+@font-face { font-family: "SockGolos"; font-weight: 600; font-display: swap; src: url("./fonts/golos-text-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+2215; }
+
+/* Layout idea: one pinned stage; the sock turns with scroll in the centre, a giant wordmark sits behind it,
+   and the whole stage changes colour once per quarter turn. Single bright theme by choice. */
+
+.hero {
+  --sun: #ffd43b;
+  --candy: #ff8fb8;
+  --cream: #fff6dc;
+  --forest: #0e3b2e;
+  --mint: #9ff0d6;
+  --font-display: "SockUnbounded", "Arial Black", "Segoe UI", system-ui, sans-serif;
+  --font-body: "SockGolos", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  position: relative;
+  height: 500vh;
+  font-family: var(--font-body);
+  background: var(--forest);
+  -webkit-font-smoothing: antialiased;
+}
+.hero * { box-sizing: border-box; margin: 0; }
+.hero a { color: inherit; text-decoration: none; }
+.hero :focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+
+/* ---------- stage ---------- */
+.pin {
+  --bg: var(--sun); --ink: var(--forest); --ghost: #ffe680; --pop: var(--candy); --pop-ink: var(--forest);
+  --btn-bg: var(--forest); --btn-ink: var(--sun);
+  color-scheme: light;
+  position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden;
+  background: var(--bg); color: var(--ink);
+  transition: background-color .7s ease, color .5s ease;
+}
+.pin[data-beat="1"] { --bg: var(--candy); --ghost: #ffb0cd; --pop: var(--sun); --btn-ink: var(--candy); }
+.pin[data-beat="2"] { --bg: var(--cream); --ghost: #ffe9a8; --pop: var(--candy); --btn-ink: var(--cream); }
+.pin[data-beat="3"] { --bg: var(--sun); --ghost: #ffe680; --pop: var(--forest); --pop-ink: var(--cream); }
+.pin[data-beat="4"] { --bg: var(--forest); --ink: var(--cream); --ghost: #154a3a; --pop: var(--sun); --pop-ink: var(--forest); --btn-bg: var(--sun); --btn-ink: var(--forest); }
+
+/* nav */
+.nav {
+  position: absolute; inset: 0 0 auto 0; z-index: 6;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 22px clamp(18px, 4vw, 56px);
+}
+.brand { font-family: var(--font-display); font-weight: 900; font-size: clamp(17px, 1.5vw, 22px); letter-spacing: .02em; display: flex; align-items: center; gap: 10px; }
+.brand i { width: 14px; height: 14px; border-radius: 50%; background: var(--pop); border: 3px solid var(--ink); transition: background-color .5s; }
+.links { display: flex; gap: clamp(18px, 2.4vw, 40px); font-weight: 600; font-size: 15px; }
+.links a { padding: 6px 2px; border-bottom: 2px solid transparent; }
+.links a:hover { border-color: currentColor; }
+.cart { font-family: var(--font-display); font-weight: 500; font-size: 13px; padding: 11px 18px; border-radius: 999px; border: 2px solid var(--ink); transition: background-color .2s, color .2s; }
+.cart:hover { background: var(--ink); color: var(--bg); }
+
+/* giant wordmark behind the sock */
+.ghost {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  font-family: var(--font-display); font-weight: 900; line-height: .86; color: var(--ghost);
+  pointer-events: none; user-select: none; font-size: clamp(110px, 25vw, 430px); white-space: nowrap;
+  transition: color .7s ease;
+}
+.ghost span { display: block; will-change: transform; }
+.ghost span:first-child { transform: translateX(calc(var(--p, 0) * -9vw)); }
+.ghost span:last-child { transform: translateX(calc(var(--p, 0) * 9vw)); }
+
+/* sock */
+.sock {
+  position: absolute; z-index: 3; left: 50%; top: 54%; transform: translate(-50%, -50%);
+  height: min(80svh, 900px); aspect-ratio: 800 / 1120; touch-action: pan-y; cursor: grab;
+}
+.sock.dragging { cursor: grabbing; }
+.sock canvas { width: 100%; height: 100%; display: block; filter: drop-shadow(0 26px 22px rgba(14, 59, 46, .22)); }
+.sock::after {
+  content: ""; position: absolute; left: 14%; right: 14%; bottom: 1.5%; height: 7%; border-radius: 50%; z-index: -1;
+  background: radial-gradient(closest-side, rgba(8, 34, 26, .38), rgba(8, 34, 26, 0));
+}
+
+/* burst sticker behind the sock */
+.burst {
+  position: absolute; z-index: 2; left: 50%; top: 50%; width: min(58svh, 620px); aspect-ratio: 1;
+  background: var(--pop); transition: background-color .7s ease;
+  transform: translate(-50%, -50%) rotate(calc(var(--p, 0) * 160deg));
+  clip-path: polygon(50% 0, 58% 13%, 71% 5%, 74% 20%, 89% 17%, 86% 32%, 100% 36%, 91% 48%, 100% 60%, 87% 66%, 91% 81%, 76% 80%, 73% 95%, 60% 87%, 50% 100%, 40% 87%, 27% 95%, 24% 80%, 9% 81%, 13% 66%, 0 60%, 9% 48%, 0 36%, 14% 32%, 11% 17%, 26% 20%, 29% 5%, 42% 13%);
+}
+
+/* copy */
+.copy { position: absolute; z-index: 5; left: clamp(18px, 4vw, 56px); bottom: clamp(64px, 11svh, 120px); width: min(430px, 34vw); }
+.beat {
+  position: absolute; left: 0; bottom: 0; width: 100%;
+  opacity: 0; transform: translateY(18px); pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease;
+  display: flex; flex-direction: column; gap: 16px; align-items: flex-start;
+}
+.beat.on { opacity: 1; transform: none; pointer-events: auto; }
+.tag {
+  font-family: var(--font-display); font-weight: 500; font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 7px 12px; border-radius: 999px; background: var(--pop); color: var(--pop-ink); transition: background-color .5s;
+}
+.beat h1, .beat h2 {
+  font-family: var(--font-display); font-weight: 900; line-height: 1.02; letter-spacing: -.01em; text-wrap: balance;
+  font-size: clamp(32px, 3.7vw, 60px);
+}
+.beat p { font-size: clamp(16px, 1.25vw, 19px); line-height: 1.5; max-width: 34ch; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 800; font-size: 15px;
+  padding: 16px 26px; border-radius: 999px; background: var(--btn-bg); color: var(--btn-ink);
+  transition: transform .2s, background-color .5s, color .5s;
+}
+.btn:hover { transform: translateY(-2px) rotate(-1.5deg); }
+.btn svg { width: 18px; height: 18px; }
+
+/* right rail: angle dial */
+.rail { position: absolute; z-index: 5; right: clamp(18px, 4vw, 56px); bottom: clamp(64px, 11svh, 120px); display: flex; flex-direction: column; align-items: flex-end; gap: 14px; text-align: right; }
+.dial { position: relative; width: 132px; height: 132px; }
+.dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.dial circle { fill: none; stroke-width: 7; }
+.track { stroke: currentColor; opacity: .16; }
+.fill { stroke: currentColor; stroke-linecap: round; stroke-dasharray: 345.6; stroke-dashoffset: 345.6; }
+.dial b { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 26px; font-variant-numeric: tabular-nums; }
+.rail small { font-size: 14px; font-weight: 600; max-width: 18ch; line-height: 1.35; }
+
+/* rotating ring badge */
+.ring {
+  position: absolute; z-index: 4; right: clamp(18px, 7vw, 120px); top: clamp(96px, 17svh, 170px);
+  width: clamp(120px, 11vw, 168px); aspect-ratio: 1; transform: rotate(calc(var(--p, 0) * -300deg));
+}
+.ring text { font-family: var(--font-display); font-weight: 800; font-size: 13.5px; letter-spacing: .14em; fill: currentColor; }
+.ring circle { fill: var(--pop); transition: fill .7s ease; }
+
+/* scroll hint */
+.hint { position: absolute; z-index: 5; left: 50%; bottom: 20px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 14px; transition: opacity .4s; }
+.hint i { width: 22px; height: 34px; border: 2px solid currentColor; border-radius: 12px; position: relative; }
+.hint i::after { content: ""; position: absolute; left: 50%; top: 6px; width: 4px; height: 7px; margin-left: -2px; border-radius: 2px; background: currentColor; animation: nudge 1.6s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(10px); opacity: .2; } }
+.moved .hint { opacity: 0; }
+
+@media (max-width: 820px) {
+  .links { display: none; }
+  .ghost { font-size: clamp(96px, 34vw, 260px); }
+  .sock { top: 41%; height: min(56svh, 560px); }
+  .burst { top: 38%; width: min(44svh, 380px); }
+  .copy { width: auto; right: 18px; bottom: 64px; }
+  .beat h1, .beat h2 { font-size: clamp(28px, 8.2vw, 40px); }
+  .beat { gap: 12px; }
+  .rail { bottom: auto; top: 84px; right: 18px; }
+  .rail small { display: none; }
+  .dial { width: 76px; height: 76px; }
+  .dial b { font-size: 15px; }
+  .ring { display: none; }
+  .hint { bottom: 16px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .beat, .pin, .ghost, .burst, .btn { transition: none; }
+  .hint i::after { animation: none; }
+  .ghost span, .ring { transform: none; }
+  .burst { transform: translate(-50%, -50%); }
+}
